@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+
+//task1 ------------------ How to compare two JSON has same property without order ? ----------------------------------------         
+         
+    let obj1 = { name: "person1", age: 5 };
+    let obj2 = { age: 5, name: "person1" };
+
+    //console.log(Object.keys(obj1).sort());  store obj1 in keys and sort in keys 
+    const sortedObj1 = JSON.stringify(obj1, Object.keys(obj1).sort());
+    const sortedObj2 = JSON.stringify(obj2, Object.keys(obj2).sort());
+    if(sortedObj1==sortedObj2)
+    {
+        console.log("true");
+    }
+    else
+    {
+        console.log("false");
+    }
+        
+     
+//task2 and task 3:----------use rest countires API url https://restcountries.com/v3.1/all and dislay all county flag in console and print all country name region sub region and population   
+        
+    var request = new XMLHttpRequest();        
+    request.open("GET", "https://restcountries.com/v2/all");       
+    request.send();
+        
+    request.onload = function() 
+    {
+        var data = JSON.parse(request.response);
+        console.log(data); // Log the parsed data
+
+        
+        for (var i = 0; i < data.length; i++) 
+        {       
+        if (data[i].flags)                           // Check if the country data has a flags property
+        {       
+        console.log( "Flag:", data[i].flags.png);   // displays flag
+        }
+        var countryName = data[i].name;            // getting data
+        var region = data[i].region;
+        var subregion = data[i].subregion;
+        var population = data[i].population;
+        
+        console.log("Country:", countryName);      //print all country name region sub region and population
+        console.log("Region:", region);
+        console.log("Subregion:", subregion);
+        console.log("Population:", population);
+        
+    }
+};    
+
+
+    </script>
+</body>
+</html>
